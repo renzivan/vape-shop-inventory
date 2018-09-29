@@ -1,0 +1,101 @@
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+    .sidebar-nav .sidebar-brand {
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        text-indent: 0px;
+    }
+    .sidebar-nav>.sidebar-brand img {
+        width: 20px;
+    }
+    #wrapper.toggled {
+        /*width: 180px;*/
+        padding-left: 180px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 180px;
+        overflow-x: hidden;
+    }
+
+    .sidebar-nav {
+        width: 200px;
+    }
+    .sidebar-nav li:nth-child(2){
+        margin-top: 130px;
+    }
+    .sidebar-nav li:not(.sidebar-brand) a{
+      text-indent: 35px;
+    }
+    #menu-toggle-wrapper {
+        z-index: 9999;
+        position: fixed;
+        margin-top: 65px;
+        left: 0;
+        /*display: flex;
+        padding-left: -70px;*/
+    }
+    #menu-toggle-wrapper #menu-toggle-box {
+        position: fixed;
+        left: 0;
+    }
+    #menu-toggle-wrapper #user-toggle-dropdown {
+        font-size: .8rem;
+    }
+    #user-toggle-dropdown .btn {
+      line-height: 54px;
+      height: 64px;
+    }
+    #user-toggle-dropdown .btn span {
+      display: none;
+    }
+    #page-content-wrapper {
+        position: absolute;
+        left: 0;
+        margin-top: 65px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+    }
+    .container-fluid {
+        padding-top: 60px;
+        width: 100%;
+        margin: 0;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        padding-left: 200px!important;
+    }
+    #user-toggle-dropdown .btn .dropdown-menu {
+      margin-right: -10px;
+    }
+    #user-toggle-dropdown .btn .dropdown-menu a li{
+      padding: 0px 10px;
+      line-height: 40px;
+    }
+
+    #menu-toggle hr {
+        margin-bottom:2px;
+    }
+    
+    /*footer*/
+     #footer-wrapper {
+        right: 0;
+        line-height: 15px;
+        z-index: 9999;
+        position: fixed;
+     }
+
+     #footer-wrapper #details-wrapper {
+        padding: 0 5px;
+        font-size: 9px;
+     }
+
+
+}
