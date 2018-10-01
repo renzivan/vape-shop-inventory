@@ -42,21 +42,22 @@
                             </thead>
                             <tbody>
                                 <?php
+
                                    // while ($data = mysqli_fetch_assoc($search_query_result)){
                                         echo "
                                             <form action='' method='POST'>
                                                 <tr>
-                                                    <td><input type='text' class='form-control' name='trans_name' autocomplete='off' value='BrainFreeze 60ml'></td>
-                                                    <td><input type='text' class='form-control' name='trans_name' autocomplete='off' value='E Juice'></td>
-                                                    <td><input type='text' class='form-control' name='trans_price' autocomplete='off' value='200'></td>
-                                                    <td><input type='text' class='form-control'  name='trans_qty' style='width:50px;' value='15'></td>
-                                                    <td>
-                                                        <button type='submit' name='' class=''>
+                                                    <td><input type='text' class='form-control' name='add_name' autocomplete='off' value=''></td>
+                                                    <td><input type='text' class='form-control' name='add_category' autocomplete='off' value=''></td>
+                                                    <td><input type='text' class='form-control' name='add_price' autocomplete='off' value=''></td>
+                                                    <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value=''></td>
+                                                    
+                                                        <!-- <button type='submit' name='' class=''>
                                                             <img src='../img/edit.png'/ width=30>
-                                                        </button>
-                                                    </td>
+                                                        </button> -->
+
                                                     <td>
-                                                        <button type='submit' name='' class=''>
+                                                        <button type='submit' name='add_submit' class=''>
                                                             <img src='../img/save.png'/ width=30>
                                                         </button>
                                                     </td>
@@ -64,6 +65,23 @@
                                             </form>
                                         "; 
                                     //}
+                                    $con = mysqli_connect("localhost","root","Hello101!","uptown");
+                                    if(isset($_POST['add_submit'])){
+                                        $name = $_POST['add_name'];
+                                        $category = $_POST['add_category'];
+                                        $price = $_POST['add_price'];
+                                        $quantity = $_POST['add_quantity'];
+
+                                        $query = "insert into product (name,category,price,quantity,quantity_sold) values ('$name','$category',$price,$quantity,0)";
+                                        if ($con->query($query) === TRUE) {
+                                            echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
+                                                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                                    <strong>Successfully Added:</strong> " . $name . ".
+                                                </div>";
+                                        } else {
+                                            echo "Error: " . $query . "<br>" . $con->error;
+                                        }
+                                    }
                                 ?>
                             </tbody>
                         </table>
@@ -85,7 +103,7 @@
 						</thead>
 						<tbody>
 							<?php
-							$con = mysqli_connect("localhost","root","","uptown");
+							$con = mysqli_connect("localhost","root","Hello101!","uptown");
 							$search_query_result = mysqli_query($con,"select * from product");
 							   while ($data = mysqli_fetch_assoc($search_query_result)){
 									echo "
@@ -118,7 +136,7 @@
         <!-- </div> -->
         <!-- /#page-content-wrapper -->
         <footer>
-            <div id='footer-wrapper'>
+            <!-- <div id='footer-wrapper'>
                 <hr>
                 <div id='details-wrapper'>
                     <span>
@@ -129,7 +147,7 @@
                     </span>
                 </div>
 
-            </div>
+            </div> -->
             <?php
                 mr_foot();
             ?>
