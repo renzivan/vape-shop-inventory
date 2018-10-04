@@ -24,10 +24,6 @@
            
         <!-- <div id="page-content-wrapper"> -->
             <div class="container-fluid">
-                <!-- <img src="img/nikx.jpg" alt="" width=200> -->
-                <!-- <h1>Setsuna</h1>
-                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure fugiat assumenda, debitis hic tenetur ab dolore recusandae sint, perferendis ullam vero, accusantium enim magni modi dignissimos molestias, eos atque aliquid. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta qui atque ab vel recusandae ipsa praesentium maxime facilis officia consequuntur facere quasi cumque, illum, dolor totam officiis perferendis. Obcaecati, quod.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p> -->
                 <!-- Table row -->
                 <div class="">
                     <div class="col-xs-8 table-responsive">
@@ -41,30 +37,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+                                <form action='' method='POST'>
+                                    <tr>
+                                        <td><input type='text' class='form-control' name='add_name' autocomplete='off' value=''></td>
+                                        <td><input type='text' class='form-control' name='add_category' autocomplete='off' value=''></td>
+                                        <td><input type='text' class='form-control' name='add_price' autocomplete='off' value=''></td>
+                                        <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value=''></td>
+                                        
+                                            <!-- <button type='submit' name='' class=''>
+                                                <img src='../img/edit.png'/ width=30>
+                                            </button> -->
 
-                                   // while ($data = mysqli_fetch_assoc($search_query_result)){
-                                        echo "
-                                            <form action='' method='POST'>
-                                                <tr>
-                                                    <td><input type='text' class='form-control' name='add_name' autocomplete='off' value=''></td>
-                                                    <td><input type='text' class='form-control' name='add_category' autocomplete='off' value=''></td>
-                                                    <td><input type='text' class='form-control' name='add_price' autocomplete='off' value=''></td>
-                                                    <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value=''></td>
-                                                    
-                                                        <!-- <button type='submit' name='' class=''>
-                                                            <img src='../img/edit.png'/ width=30>
-                                                        </button> -->
+                                        <td>
+                                            <button type='submit' name='add_submit' class=''>
+                                                <img src='../img/save.png'/ width=30>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </form>
+                            </tbody>
+                        </table>
 
-                                                    <td>
-                                                        <button type='submit' name='add_submit' class=''>
-                                                            <img src='../img/save.png'/ width=30>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </form>
-                                        "; 
-                                    //}
+                          <?php
                                     $con = mysqli_connect("localhost","root","Hello101!","uptown");
                                     if(isset($_POST['add_submit'])){
                                         $name = $_POST['add_name'];
@@ -76,21 +70,25 @@
                                         if ($con->query($query) === TRUE) {
                                             echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
                                                     <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                                    <strong>Successfully Added:</strong> " . $name . ".
+                                                    <strong>Succes!</strong> Added new product: " . $name . ".
                                                 </div>";
                                         } else {
-                                            echo "Error: " . $query . "<br>" . $con->error;
+                                            //echo "Error: " . $query . "<br>" . $con->error;
+                                            echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
+                                                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                                    <strong>Error!</strong> Adding product failed.
+                                                </div>";
                                         }
                                     }
                                 ?>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-				<div class="col-xs-8">
-                    <input type='text' id="SEARCH" onkeyup="searching()" class='form-control' autocomplete='on'>
+            </div>
+            <div class="container-fluid"><br>
+                <div class="col-xs-8">
+                    <input type='text' id="search_input" onkeyup="searching()" class='form-control' autocomplete='off' placeholder="Search for product or category..." >
                 </div>
-				<div class="col-xs-8 table-responsive">
+				<div class="table-responsive">
 					<table class="table" id="myTable">
 						<thead>
 							<tr>
@@ -155,30 +153,29 @@
     </div>
     <!-- /#wrapper -->
 
-    
 
-</body>
 <script>
 function searching() {
   var input, filter, table, tr, td, i;
-  input = document.getElementById("SEARCH");
+  input = document.getElementById("search_input");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
-	td2 = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+    td2 = tr[i].getElementsByTagName("td")[1];
+    if (td || td2) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
-      } else if (td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
+      }else {
         tr[i].style.display = "none";
       }
     } 
   }
 }
 </script>
+</body>
+
+
 
 </html>
