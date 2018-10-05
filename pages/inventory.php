@@ -59,6 +59,7 @@
                         </table>
 
                           <?php
+                                    //add new product
                                     $con = mysqli_connect("localhost","root","Hello101!","uptown");
                                     if(isset($_POST['add_submit'])){
                                         $name = $_POST['add_name'];
@@ -96,7 +97,7 @@
 							<th>Category</th>
 							<th>Price</th>
 							<th>Quantity</th>
-							<th>Quantity Sold</th>
+							<th style='display:none;' class='qty-sold'>Quantity Sold</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -107,18 +108,34 @@
 									echo "
 										<form action='' method='POST'>
 											<tr>
-												<td><input type='hidden' class='form-control' name='trans_name' autocomplete='off' value='".$data['name']."'>".$data['name']."</td>
-												<td><input type='hidden' class='form-control' name='trans_name' autocomplete='off' value='".$data['category']."'>".$data['category']."</td>
-												<td><input type='hidden' class='form-control' name='trans_price' autocomplete='off' value='".$data['price']."'>".$data['price']."</td>
-												<td><input type='hidden' class='form-control'  name='trans_qty' style='width:50px;' value='".$data['quantity']."'>".$data['quantity']."</td>
-												<td><input type='hidden' class='form-control'  name='trans_qty' style='width:50px;' value='".$data['quantity_sold']."'>".$data['quantity_sold']."</td>
 												<td>
-													<button type='submit' name='' class=''>
+                                                    <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."'>
+                                                    <input type='hidden' class='form-control edit-mode' name='edit_name' autocomplete='off' value='".$data['name']."' id='product_name'>
+                                                    <label class='display_data'>".$data['name']."</label>
+                                                </td>
+												<td>
+                                                    <input type='hidden' class='form-control edit-mode' name='edit_category' autocomplete='off' value='".$data['category']."' id='product_category'>
+                                                    <label class='display_data'>".$data['category']."</label>
+                                                </td>
+												<td>
+                                                    <input type='hidden' class='form-control edit-mode' name='edit_price' autocomplete='off' value='".$data['price']."' id='product_price'>
+                                                    <label class='display_data'>".$data['price']."</label>
+                                                </td>
+												<td>
+                                                    <input type='hidden' class='form-control edit-mode'  name='edit_qty' style='width:50px;' value='".$data['quantity']."' id='product_qty'>
+                                                    <label class='display_data'>".$data['quantity']."</label>
+                                                </td>
+												<td style='display:none;' class='qty-sold'>
+                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_qty_sold' style='width:50px;' value='0' id='product_qty_sold'>
+                                                    <!-- <label class='display_data qty-sold'></label> -->
+                                                </td>
+												<td>
+													<button type='button' name='edit_button' class='edit-button'>
 														<img src='../img/edit.png'/ width=30>
 													</button>
 												</td>
 												<td>
-													<button type='submit' name='' class=''>
+													<button type='submit' name='save_button' class='save-button'>
 														<img src='../img/save.png'/ width=30>
 													</button>
 												</td>
@@ -126,6 +143,8 @@
 										</form>
 									"; 
 								}
+                                /*update product changes*/
+                                
 							?>
 						</tbody>
 					</table>
@@ -133,47 +152,43 @@
             </div>
         <!-- </div> -->
         <!-- /#page-content-wrapper -->
+       
         <footer>
-            <!-- <div id='footer-wrapper'>
-                <hr>
-                <div id='details-wrapper'>
-                    <span>
-                        <strong>Copyright © DeeZee</strong> All rights reserved.
-                    </span>
-                    <span>
-                        <strong>Version</strong> 1.0.0
-                    </span>
-                </div>
-
-            </div> -->
             <?php
                 mr_foot();
             ?>
+
         </footer>
     </div>
     <!-- /#wrapper -->
+    <script>
+        $(window).on("load", function(){
+            $('.qty-sold').hide();
+        });
 
+        $('.edit-button').click(function(){
+            $('.edit-mode').prop('type','hidden');
+            $('.qty-sold').fadeIn(1000);
+            $('.display_data').show();
+            $(this).closest('tr').find('td > input.edit-mode').prop('type','text');
+            $(this).closest('tr').find('td > .display_data').hide();
+        });
+        $('.save-button').click(function(){
+            var xname = $('#product_name').val();
+            var xcateg = $('#product_category').val();
+            var xprice = $('#product_price').val();
+            var xqty = $('#product_qty').val();
+            var xqtys = $('#product_qty_sold').val();
 
-<script>
-function searching() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("search_input");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    td2 = tr[i].getElementsByTagName("td")[1];
-    if (td || td2) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      }else {
-        tr[i].style.display = "none";
-      }
-    } 
-  }
-}
-</script>
+            $.ajax({
+                url: 'edit.php',
+                type: 'POST',
+                data: {
+                    
+                }
+             });
+        });
+    </script>
 </body>
 
 
