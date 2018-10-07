@@ -44,7 +44,6 @@
                             </thead>
                             <tbody>
                                 <?php
-									$con = mysqli_connect("localhost","root","","uptown");
 									//connection();
 									$search_query_result = mysqli_query($con,"select * from log order by id DESC");
                                    while ($data = mysqli_fetch_assoc($search_query_result)){
