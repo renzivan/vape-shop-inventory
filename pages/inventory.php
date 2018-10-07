@@ -6,11 +6,12 @@
         include('header.php');
         include('footer.php');
         mr_head();
+        mr_authenticator();
     ?>
+    
 </head>
 
 <body>
-
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -40,7 +41,17 @@
                                 <form action='' method='POST'>
                                     <tr>
                                         <td><input type='text' class='form-control' name='add_name' autocomplete='off' value=''></td>
-                                        <td><input type='text' class='form-control' name='add_category' autocomplete='off' value=''></td>
+                                        <td><select name='add_category' class='form-control' >
+                                            <option value='MOD'>MOD</option>
+                                            <option value='E Juice'>E Juice</option>
+                                            <option value='Atomizer'>Atomizer</option>
+                                            <option value='Cotton'>Cotton</option>
+                                            <option value='Wires'>Wires</option>
+                                            <option value='Battery'>Battery</option>
+                                            <option value='Accessories'>Accessories</option>
+                                            <option value='Beverages'>Beverages</option>
+                                            <option value='Services'>Services</option>
+                                        </select></td>
                                         <td><input type='text' class='form-control' name='add_price' autocomplete='off' value=''></td>
                                         <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value=''></td>
                                         
@@ -49,8 +60,9 @@
                                             </button> -->
 
                                         <td>
-                                            <button type='submit' name='add_submit' class=''>
-                                                <img src='../img/save.png'/ width=30>
+                                            <button type='submit' name='add_submit' class='btn btn-secondary'>
+                                                <!-- <img src='../img/save.png'/ width=30> -->
+                                                Add new product
                                             </button>
                                         </td>
                                     </tr>
@@ -58,30 +70,6 @@
                             </tbody>
                         </table>
 
-                          <?php
-                                    //add new product
-                                    $con = mysqli_connect("localhost","root","Hello101!","uptown");
-                                    if(isset($_POST['add_submit'])){
-                                        $name = $_POST['add_name'];
-                                        $category = $_POST['add_category'];
-                                        $price = $_POST['add_price'];
-                                        $quantity = $_POST['add_quantity'];
-
-                                        $query = "insert into product (name,category,price,quantity,quantity_sold) values ('$name','$category',$price,$quantity,0)";
-                                        if ($con->query($query) === TRUE) {
-                                            echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
-                                                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                                    <strong>Succes!</strong> Added new product: " . $name . ".
-                                                </div>";
-                                        } else {
-                                            //echo "Error: " . $query . "<br>" . $con->error;
-                                            echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
-                                                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                                    <strong>Error!</strong> Adding product failed.
-                                                </div>";
-                                        }
-                                    }
-                                ?>
                     </div>
                 </div>
             </div>
@@ -93,20 +81,21 @@
 					<table class="table" id="myTable">
 						<thead>
 							<tr>
-							<th>Product</th>
-							<th>Category</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th style='display:none;' class='qty-sold'>Quantity Sold</th>
+							<th style='width: 25%;'>Product</th>
+							<th style='width: 25%;'>Category</th>
+							<th style='width: 15%;'>Price</th>
+							<th style='width: 5%;'>Quantity</th>
+                            <th style='display:none;width: 5%;' class='qty-sold col-md-1'>Sold</th>
+							<th style='display:none;width: 5%;' class='qty-sold col-md-1'>Restock</th>
+                            <th style='width: 15%;'></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$con = mysqli_connect("localhost","root","Hello101!","uptown");
 							$search_query_result = mysqli_query($con,"select * from product");
 							   while ($data = mysqli_fetch_assoc($search_query_result)){
 									echo "
-										<form action='' method='POST'>
+										<form action='queries.php' method='POST'>
 											<tr>
 												<td>
                                                     <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."'>
@@ -122,28 +111,36 @@
                                                     <label class='display_data'>".$data['price']."</label>
                                                 </td>
 												<td>
-                                                    <input type='hidden' class='form-control edit-mode'  name='edit_qty' style='width:50px;' value='".$data['quantity']."' id='product_qty'>
+                                                    <input type='hidden' class='form-control edit-mode'  name='edit_qty' style='width:65px;' value='".$data['quantity']."' id='product_qty'>
                                                     <label class='display_data'>".$data['quantity']."</label>
                                                 </td>
+                                                <td style='display:none;' class='qty-sold'>
+                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_qty_sold' style='width:65px;' value='' id='product_qty_sold'>
+                                                    <!-- <label class='display_data qty-sold'></label> -->
+                                                </td>
 												<td style='display:none;' class='qty-sold'>
-                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_qty_sold' style='width:50px;' value='0' id='product_qty_sold'>
+                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_restock' style='width:65px;' value='' id='product_restock'>
                                                     <!-- <label class='display_data qty-sold'></label> -->
                                                 </td>
 												<td>
-													<button type='button' name='edit_button' class='edit-button'>
-														<img src='../img/edit.png'/ width=30>
+													<button type='button' name='edit_button' class='edit-button btn btn-secondary'>
+													   <!-- <img src='../img/edit.png'/ width=30>-->
+                                                       Edit
 													</button>
+
+                                                    <button type='submit' name='save_button' class='save-button btn btn-dark'>
+                                                        <!-- <img src='../img/save.png'/ width=30> -->
+                                                        Save
+                                                    </button>
 												</td>
 												<td>
-													<button type='submit' name='save_button' class='save-button'>
-														<img src='../img/save.png'/ width=30>
-													</button>
 												</td>
 											</tr>
+
 										</form>
 									"; 
+
 								}
-                                /*update product changes*/
                                 
 							?>
 						</tbody>
@@ -161,34 +158,6 @@
         </footer>
     </div>
     <!-- /#wrapper -->
-    <script>
-        $(window).on("load", function(){
-            $('.qty-sold').hide();
-        });
-
-        $('.edit-button').click(function(){
-            $('.edit-mode').prop('type','hidden');
-            $('.qty-sold').fadeIn(1000);
-            $('.display_data').show();
-            $(this).closest('tr').find('td > input.edit-mode').prop('type','text');
-            $(this).closest('tr').find('td > .display_data').hide();
-        });
-        $('.save-button').click(function(){
-            var xname = $('#product_name').val();
-            var xcateg = $('#product_category').val();
-            var xprice = $('#product_price').val();
-            var xqty = $('#product_qty').val();
-            var xqtys = $('#product_qty_sold').val();
-
-            $.ajax({
-                url: 'edit.php',
-                type: 'POST',
-                data: {
-                    
-                }
-             });
-        });
-    </script>
 </body>
 
 

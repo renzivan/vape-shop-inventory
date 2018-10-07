@@ -4,10 +4,11 @@
   border: none;
 }
 
+/*
 .table-responsive .table tbody td button {
 	background-color: transparent;
 	border-width: 0;
-}
+}*/
 
 button:hover {
 	cursor: pointer;
