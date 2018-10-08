@@ -120,11 +120,11 @@ body {
 }
 
 .sidebar-nav>.sidebar-brand {
-  text-transform: uppercase;
+  /*text-transform: uppercase;
   height: 65px;
   font-size: 25px;
+  background: #171717;*/
   line-height: 65px;
-  background: #171717;
 }
 
 .sidebar-nav>.sidebar-brand a {
@@ -135,8 +135,13 @@ body {
   color:#aaa;
 }
 
+.sidebar-nav>.sidebar-brand .logo {
+  width: 250px;
+  height: 65px;
+  margin-left: -30px;
+}
 
-.sidebar-nav>.sidebar-brand img {
+.sidebar-nav>.sidebar-brand .mobile-logo {
     margin: 0 0 5px 5px;
     width: 0%;
 }

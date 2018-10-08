@@ -1,6 +1,4 @@
-
 $(document).ready(function(){
-
 	$(function () {
 	    var url = window.location.pathname; //sets the variable 'url' to the pathname of the current window
 	    var activePage = url.substring(url.lastIndexOf('/') + 1); //sets the variable 'activePage' as the substring after the last '/' in the 'url' variable
@@ -26,10 +24,11 @@ $(document).ready(function(){
 
 $(window).on("load", function(){
     $('.qty-sold').hide();
-    console.log("sex");
 });
 
+/* edit button show elements */
 $('.edit-button').click(function(){
+    console.log('edit');
     $('.edit-mode').prop('type','hidden');
     $('.qty-sold').fadeIn(1000);
     $('.display_data').show();
@@ -38,7 +37,7 @@ $('.edit-button').click(function(){
     $(this).closest('tr').find('#product_qty_sold').focus();
 });
 
-// Menu Toggle Script -->
+/* Menu Toggle Script */
 $(document).ready(function(){
 	browserWidth = $(window).width();
 	if(browserWidth<768){
@@ -46,7 +45,6 @@ $(document).ready(function(){
     	console.log(browserWidth);
 	}
     $('#wrapper').toggleClass('toggled');
-
     $('#menu-toggle').click(function(e) {
         // e.preventDefault();
         $('#wrapper').toggleClass('toggled');
@@ -79,3 +77,48 @@ function searching() {
 		} 
 	}
 }
+
+/* add new product button AJAX */
+$('#add_button').click(function(){
+    var xname = $('#add_name').val();
+    var xcateg = $('#add_category').val();
+    var xprice = $('#add_price').val();
+    var xqty = $('#add_quantity').val();
+    var data = { name: xname, categ: xcateg, price: xprice, qty: xqty};
+    console.log(data);
+    $.post('../query/add_product.php', { name: xname, categ: xcateg, price: xprice, qty: xqty }, function(data){
+        console.log(data);
+        $('#table-add').append(data);
+        // $('.alert-dismissible').hide().fadeIn(1000);
+        $('#myTable').load(window.location + " #myTable");
+        $('.alert-dismissible').fadeOut(4000);
+    }).fail(function() {
+        // just in case posting your form failed
+        alert( "Server Error." );
+    });
+});
+
+/* save product changes button AJAX */
+$('#save_changes_button').click(function(){
+    console.log("sex");
+    var xid = $('#product_id').val();
+    var xname = $('#product_name').val();
+    var xcateg = $('#product_category').val();
+    var xprice = $('#product_price').val();
+    var xqty = $('#product_qty').val();
+    var xqty_sold = $('#product_qty_sold').val();
+    var xrestock = $('#product_restock').val();
+    var data = { id: xid, name: xname, categ: xcateg, price: xprice, qty: xqty, qty_sold: xqty_sold, restock: xrestock };
+    console.log(data);
+    $.post('../query/save_changes.php', { id: xid, name: xname, categ: xcateg, price: xprice, qty: xqty, qty_sold: xqty_sold, restock: xrestock }, function(data){
+        console.log(data);
+        $('#table-add').append(data);
+        // $('.alert-dismissible').hide().fadeIn(1000);
+        $('#myTable').load(window.location + " #myTable");
+        // $('#myTable').reload();
+        $('.alert-dismissible').fadeOut(4000);
+    }).fail(function() {
+        // just in case posting your form failed
+        alert( "Server Error." );
+    });
+});

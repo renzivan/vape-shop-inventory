@@ -28,7 +28,7 @@
                 <!-- Table row -->
                 <div class="">
                     <div class="col-xs-8 table-responsive">
-                        <table class="table" id="">
+                        <table class="table" id="table-add">
                             <thead>
                                 <tr>
                                 <th>Product</th>
@@ -38,35 +38,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action='' method='POST'>
-                                    <tr>
-                                        <td><input type='text' class='form-control' name='add_name' autocomplete='off' value=''></td>
-                                        <td><select name='add_category' class='form-control' >
-                                            <option value='MOD'>MOD</option>
-                                            <option value='E Juice'>E Juice</option>
-                                            <option value='Atomizer'>Atomizer</option>
-                                            <option value='Cotton'>Cotton</option>
-                                            <option value='Wires'>Wires</option>
-                                            <option value='Battery'>Battery</option>
-                                            <option value='Accessories'>Accessories</option>
-                                            <option value='Beverages'>Beverages</option>
-                                            <option value='Services'>Services</option>
-                                        </select></td>
-                                        <td><input type='text' class='form-control' name='add_price' autocomplete='off' value=''></td>
-                                        <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value=''></td>
-                                        
-                                            <!-- <button type='submit' name='' class=''>
-                                                <img src='../img/edit.png'/ width=30>
-                                            </button> -->
+                                <tr>
+                                    <td><input type='text' class='form-control' name='add_name' autocomplete='off' value='' id='add_name'></td>
+                                    <td><select name='add_category' class='form-control' id='add_category'>
+                                        <option value='MOD'>MOD</option>
+                                        <option value='E Juice'>E Juice</option>
+                                        <option value='Atomizer'>Atomizer</option>
+                                        <option value='Cotton'>Cotton</option>
+                                        <option value='Wires'>Wires</option>
+                                        <option value='Battery'>Battery</option>
+                                        <option value='Accessories'>Accessories</option>
+                                        <option value='Beverages'>Beverages</option>
+                                        <option value='Services'>Services</option>
+                                    </select></td>
+                                    <td><input type='text' class='form-control' name='add_price' autocomplete='off' value='' id='add_price'></td>
+                                    <td><input type='text' class='form-control'  name='add_quantity' style='width:50px;' value='' id='add_quantity'></td>
+                                    
+                                        <!-- <button type='submit' name='' class=''>
+                                            <img src='../img/edit.png'/ width=30>
+                                        </button> -->
 
-                                        <td>
-                                            <button type='submit' name='add_submit' class='btn btn-secondary'>
-                                                <!-- <img src='../img/save.png'/ width=30> -->
-                                                Add new product
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </form>
+                                    <td>
+                                        <button type='button' name='add_submit' class='btn btn-secondary' id='add_button'>
+                                            <!-- <img src='../img/save.png'/ width=30> -->
+                                            Add new product
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -95,10 +93,10 @@
 							$search_query_result = mysqli_query($con,"select * from product");
 							   while ($data = mysqli_fetch_assoc($search_query_result)){
 									echo "
-										<form action='queries.php' method='POST'>
+										<!-- <form action='queries.php' method='POST'> -->
 											<tr>
 												<td>
-                                                    <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."'>
+                                                    <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."' id='product_id'>
                                                     <input type='hidden' class='form-control edit-mode' name='edit_name' autocomplete='off' value='".$data['name']."' id='product_name'>
                                                     <label class='display_data'>".$data['name']."</label>
                                                 </td>
@@ -123,12 +121,12 @@
                                                     <!-- <label class='display_data qty-sold'></label> -->
                                                 </td>
 												<td>
-													<button type='button' name='edit_button' class='edit-button btn btn-secondary'>
+													<button type='button' class='edit-button btn btn-secondary'>
 													   <!-- <img src='../img/edit.png'/ width=30>-->
                                                        Edit
 													</button>
 
-                                                    <button type='submit' name='save_button' class='save-button btn btn-dark'>
+                                                    <button type='button' name='save_button' class='save-button btn btn-dark' id='save_changes_button'>
                                                         <!-- <img src='../img/save.png'/ width=30> -->
                                                         Save
                                                     </button>
@@ -137,7 +135,7 @@
 												</td>
 											</tr>
 
-										</form>
+										<!-- </form> -->
 									"; 
 
 								}
@@ -149,12 +147,10 @@
             </div>
         <!-- </div> -->
         <!-- /#page-content-wrapper -->
-       
         <footer>
             <?php
                 mr_foot();
             ?>
-
         </footer>
     </div>
     <!-- /#wrapper -->

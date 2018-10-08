@@ -6,9 +6,10 @@
         text-align: center;
         width: 100%;
         text-indent: 0px;
+        background: #171717;
     }
-    .sidebar-nav>.sidebar-brand img {
-        width: 20px;
+    .sidebar-nav>.sidebar-brand .logo {
+        
     }
     #wrapper.toggled {
         /*width: 180px;*/

@@ -2,7 +2,6 @@
 	//header('Location: pages/inventory.php');
         include('pages/header.php');
         include('pages/footer.php');
-        include('pages/queries.php');
 ?>
 
 

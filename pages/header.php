@@ -1,9 +1,17 @@
 <?php
+
+		$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+		if (strpos($url,'index') !== false) {
+		    include 'query/connection.php';
+		} else {
+		    include '../query/connection.php';
+		}
 	
-    include('queries.php');
+    	
+    	
 
     function mr_authenticator(){
-    	include('connection.php');
+    	include('../query/connection.php');
 		session_start();
 		$user_check = $_SESSION['logged_user'];
 		$ses_sql = mysqli_query($con,"SELECT * FROM USER WHERE username = '$user_check' ");
@@ -48,7 +56,8 @@
 	            <ul class='sidebar-nav'>
 	                <li class='sidebar-brand'>
 	                    <a href='#'>
-	                        <strong>uptown</strong>vape<img src='../img/logo.png'/>
+	                    	<img class='logo' src='../img/logo2.png'/>
+	                        <!--<strong>uptown</strong>vape<img class='mobile-logo' src='../img/logo.png'/>-->
 	                    </a>
 	                </li>
 	                <li>
