@@ -126,7 +126,7 @@
                                                        Edit
 													</button>
 
-                                                    <button type='button' name='save_button' class='save-button btn btn-dark' id='save_changes_button'>
+                                                    <button type='button' name='save_button' class='save-button btn btn-dark save_changes_button' id=''>
                                                         <!-- <img src='../img/save.png'/ width=30> -->
                                                         Save
                                                     </button>

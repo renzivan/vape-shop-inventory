@@ -99,7 +99,7 @@ $('#add_button').click(function(){
 });
 
 /* save product changes button AJAX */
-$('#save_changes_button').click(function(){
+$('.save_changes_button').click(function(){
     console.log("sex");
     var xid = $('#product_id').val();
     var xname = $('#product_name').val();
