@@ -22,20 +22,6 @@ $(document).ready(function(){
     });
 });
 
-$(window).on("load", function(){
-    $('.qty-sold').hide();
-});
-
-/* edit button show elements */
-$('.edit-button').click(function(){
-    console.log('edit');
-    $('.edit-mode').prop('type','hidden');
-    $('.qty-sold').fadeIn(1000);
-    $('.display_data').show();
-    $(this).closest('tr').find('td > input.edit-mode').prop('type','text');
-    $(this).closest('tr').find('td > .display_data').hide();
-    $(this).closest('tr').find('#product_qty_sold').focus();
-});
 
 /* Menu Toggle Script */
 $(document).ready(function(){
@@ -78,6 +64,22 @@ function searching() {
 	}
 }
 
+
+$(window).on("load", function(){
+    $('.qty-sold').hide();
+});
+
+/* edit button show elements */
+$('.edit-button').click(function(){
+    console.log('edit');
+    $('.edit-mode').prop('type','hidden');
+    $('.qty-sold').fadeIn(1000);
+    $('.display_data').show();
+    $(this).closest('tr').find('td > input.edit-mode').prop('type','text');
+    $(this).closest('tr').find('td > .display_data').hide();
+    $(this).closest('tr').find('#product_qty_sold').focus();
+});
+
 /* add new product button AJAX */
 $('#add_button').click(function(){
     var xname = $('#add_name').val();
@@ -101,13 +103,13 @@ $('#add_button').click(function(){
 /* save product changes button AJAX */
 $('.save_changes_button').click(function(){
     console.log("sex");
-    var xid = $('#product_id').val();
-    var xname = $('#product_name').val();
-    var xcateg = $('#product_category').val();
-    var xprice = $('#product_price').val();
-    var xqty = $('#product_qty').val();
-    var xqty_sold = $('#product_qty_sold').val();
-    var xrestock = $('#product_restock').val();
+    var xid = $(this).closest('tr').find('.get-id').val();
+    var xname = $(this).closest('tr').find('.product_name').val();
+    var xcateg = $(this).closest('tr').find('.product_category').val();
+    var xprice = $(this).closest('tr').find('.product_price').val();
+    var xqty = $(this).closest('tr').find('.product_qty').val();
+    var xqty_sold = $(this).closest('tr').find('.product_qty_sold').val();
+    var xrestock = $(this).closest('tr').find('.product_restock').val();
     var data = { id: xid, name: xname, categ: xcateg, price: xprice, qty: xqty, qty_sold: xqty_sold, restock: xrestock };
     console.log(data);
     $.post('../query/save_changes.php', { id: xid, name: xname, categ: xcateg, price: xprice, qty: xqty, qty_sold: xqty_sold, restock: xrestock }, function(data){

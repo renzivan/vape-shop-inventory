@@ -12,9 +12,9 @@
 	    $edit_quantity = $_POST['qty'];
 	    $edit_quantity_sold = $_POST['qty_sold'];
 	    $edit_restock = $_POST['restock'];
-	    if(!is_numeric($edit_quantity_sold)){
+	    if(!is_numeric($edit_quantity_sold) || $edit_quantity_sold==''){
 	    	$edit_quantity_sold = 0;
-	    }elseif(!is_numeric($edit_restock)){
+	    }if(!is_numeric($edit_restock) || $edit_restock==''){
 	    	$edit_restock = 0;
 	    }
 	    $edit_quantity = $edit_quantity - $edit_quantity_sold;

@@ -96,28 +96,28 @@
 										<!-- <form action='queries.php' method='POST'> -->
 											<tr>
 												<td>
-                                                    <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."' id='product_id'>
-                                                    <input type='hidden' class='form-control edit-mode' name='edit_name' autocomplete='off' value='".$data['name']."' id='product_name'>
+                                                    <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."'>
+                                                    <input type='hidden' class='form-control edit-mode product_name' name='edit_name' autocomplete='off' value='".$data['name']."' id='product_name'>
                                                     <label class='display_data'>".$data['name']."</label>
                                                 </td>
 												<td>
-                                                    <input type='hidden' class='form-control edit-mode' name='edit_category' autocomplete='off' value='".$data['category']."' id='product_category'>
+                                                    <input type='hidden' class='form-control edit-mode product_category' name='edit_category' autocomplete='off' value='".$data['category']."' id='product_category'>
                                                     <label class='display_data'>".$data['category']."</label>
                                                 </td>
 												<td>
-                                                    <input type='hidden' class='form-control edit-mode' name='edit_price' autocomplete='off' value='".$data['price']."' id='product_price'>
+                                                    <input type='hidden' class='form-control edit-mode product_price' name='edit_price' autocomplete='off' value='".$data['price']."' id='product_price'>
                                                     <label class='display_data'>".$data['price']."</label>
                                                 </td>
 												<td>
-                                                    <input type='hidden' class='form-control edit-mode'  name='edit_qty' style='width:65px;' value='".$data['quantity']."' id='product_qty'>
+                                                    <input type='hidden' class='form-control edit-mode product_qty'  name='edit_qty' style='width:65px;' value='".$data['quantity']."' id='product_qty'>
                                                     <label class='display_data'>".$data['quantity']."</label>
                                                 </td>
                                                 <td style='display:none;' class='qty-sold'>
-                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_qty_sold' style='width:65px;' value='' id='product_qty_sold'>
+                                                    <input type='hidden' class='form-control edit-mode qty-sold product_qty_sold'  name='edit_qty_sold' style='width:65px;' value='' id='product_qty_sold'>
                                                     <!-- <label class='display_data qty-sold'></label> -->
                                                 </td>
 												<td style='display:none;' class='qty-sold'>
-                                                    <input type='hidden' class='form-control edit-mode qty-sold'  name='edit_restock' style='width:65px;' value='' id='product_restock'>
+                                                    <input type='hidden' class='form-control edit-mode qty-sold product_restock'  name='edit_restock' style='width:65px;' value='' id='product_restock'>
                                                     <!-- <label class='display_data qty-sold'></label> -->
                                                 </td>
 												<td>
