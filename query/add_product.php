@@ -13,23 +13,24 @@ include('connection.php');
         $query = "insert into product (name,category,price,quantity,quantity_sold) values ('$name','$category',$price,$quantity,0)";
         $date = date("F jS Y h:i",time());
         if ($con->query($query) === TRUE) {
-           	echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
-                        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                        <strong>Succes!</strong> Added new product: " . $name . ".
-                    </div>";
+           	// echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
+            //             <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+            //             <strong>Succes!</strong> Added new product: " . $name . ".
+            //         </div>";
 		    $log_query = "INSERT INTO log (description,product,quantity,price,date)
     					values ('Added New Product','$name',$quantity,$price,'$date')";
    			$con->query($log_query);
-
+            echo true;
             // $html = '<tr>';
             // $html .= '<td>CHAR</td>';
             // $html .= '</tr>';
 
             // echo $html;
         } else {
-            echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
-                        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                        <strong>Error!</strong> Adding product failed.
-                    </div>";
+            // echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
+            //             <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+            //             <strong>Error!</strong> Adding product failed.
+            //         </div>";
+            echo false;
         }
     // }

@@ -98,12 +98,19 @@ $('#add_button').click(function(){
     console.log(data);
     $.post('../query/add_product.php', { name: xname, categ: xcateg, price: xprice, qty: xqty }, function(data){
         console.log(data);
-        $('#table-add').append(data);
-        $('.alert-dismissible').fadeOut(4000);
+        // $('#table-add').append(data);
+        if(data==1){
+            $('.alert-danger').hide();
+            $('#table-add').append("<div class='alert alert-success alert-dismissible' style='display:inline-block;'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Succes!</strong> Added new product: " + name + ".</div>");
+            $('.alert-success').fadeOut(2000, function(){
+                location.reload();
+            });
+        }else{
+            $('#table-add').append("<div class='alert alert-danger alert-dismissible' style='display:inline-block;'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error!</strong> Adding product failed.</div>");
+        }
         // $('.alert-dismissible').hide().fadeIn(1000);
-        $('#myTable').load(window.location + " #myTable");
-        $('#myTable tr').hide().slice(0,10).show();
-
+        // $('#myTable').load(window.location.replace + " #myTable");
+        // $('#myTable tr').hide().slice(0,10).show();
     }).fail(function() {
         // just in case posting your form failed
         alert( "Server Error." );
