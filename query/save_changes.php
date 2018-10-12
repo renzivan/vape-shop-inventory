@@ -23,17 +23,21 @@
 	    $edit_date = date("F jS Y h:i");
 
 	    if ($con->query($edit_query) === TRUE) {
-            echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
-                        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                        <strong>Succes!</strong> Changes saved.
-                    </div>";
+            // echo "<div class='alert alert-success alert-dismissible' style='display:inline-block;'>
+            //             <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+            //             <strong>Succes!</strong> Changes saved.
+            //         </div>";
+            echo true;
 		    $log_query = "INSERT INTO log (description,product,quantity,price,date)
     					values ('Edited','$edit_name',$edit_quantity,$edit_price,'$edit_date')";
 		   	$con->query($log_query);
+		   	
+
 	    } else {
-          	echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
-                        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                        <strong>Error!</strong> Changes not saved.
-                    </div>";
+          	// echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
+           //              <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+           //              <strong>Error!</strong> Changes not saved.
+           //          </div>";
+	    	echo false;
 	    }
 	// }

@@ -26,18 +26,25 @@
   <div class="login-box-body">
     <p class="login-box-msg">Change Password</p>
 
+      <?php
+  
+            $get_passwd = $_SESSION['getpassword'];
+            $get_user_id = $_SESSION['getid'];
+      ?>
   <!--Added by renz -->
-    <form action="" method="post" name="login">
+    <!-- <form action="" method="post" name="login"> -->
       <div class="form-group has-feedback">
         <label >Old Password</label>
-        <input type="password" class="form-control" placeholder="Enter Old Password" autofocus autocomplete="off" name="old_pass">
+        <input type="hidden" class="form-control get_id_password" placeholder="Enter Old Password" autofocus autocomplete="off" name="old_pass" value="<?php echo $get_user_id; ?>">
+        <input type="hidden" class="form-control get_old_password" placeholder="Enter Old Password" autofocus autocomplete="off" name="old_pass" value="<?php echo $get_passwd; ?>">
+        <input type="password" class="form-control old_pass" placeholder="Enter Old Password" autofocus autocomplete="off" name="old_pass">
       </div>
       <div class="form-group has-feedback">
         <label>New Password</label>
-        <input type="password" class="form-control" placeholder="Enter New Password" name="new_pass" id="password">
+        <input type="password" class="form-control new_pass" placeholder="Enter New Password" name="new_pass" id="password">
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Confirm New Password" name="new_pass_confirm" id="confirm_password">
+        <input type="password" class="form-control new_pass_confirm" placeholder="Confirm New Password" name="new_pass_confirm" id="confirm_password">
       </div>
       <div class="form-group has-feedback">
         <p id="message"></p>
@@ -45,50 +52,14 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-6">
-          <button name ="btn_confirm_password" type="submit" class="btn btn-primary btn-block btn-flat" value="Login" id="btn_confirm_password">Confirm</button>
+          <button name ="btn_confirm_password" type="button" class="btn btn-primary btn-block btn-flat" value="Login" id="btn_confirm_password">Confirm</button>
         </div>
         <div class="col-xs-6">
           <a href="inventory.php"  class="btn btn-secondary btn-block btn-flat">Cancel</a>
         </div>
-        <?php 
-
-            if(isset($_POST['btn_confirm_password'])){
-              
-            $passwd = $_SESSION['getpassword'];
-            $getid = $_SESSION['getid'];
-                $new_password = '';
-                $old_pass = $_POST['old_pass'];
-                $new_pass = $_POST['new_pass'];
-                $new_pass_confirm = $_POST['new_pass_confirm'];
-                if($old_pass == $passwd){
-                    if($new_pass == $new_pass_confirm){
-                        $new_password = $new_pass_confirm;
-                        $query = "UPDATE user SET password = '$new_password' WHERE id = '$getid' ";
-                        if ($con->query($query) === TRUE) {
-                            echo ("<SCRIPT LANGUAGE='JavaScript'>
-                            window.alert('Success!');
-                            window.location.href='inventory.php';
-                            </SCRIPT>");
-                        } else {
-                            echo ("<SCRIPT LANGUAGE='JavaScript'>
-                            window.alert('Failed!');
-                            window.location.href='changepassword.php';
-                            </SCRIPT>");
-                        }
-                    }
-                }else {
-                    echo "<script>
-                            window.alert('Change Password Failed!');
-                            window.location.href='changepassword.php';
-                        </script>";
-                }
-                
-            }
-
-        ?>
         <!-- /.col -->
       </div>
-    </form>
+    <!-- </form> -->
     <?php 
         mr_foot();
     ?>

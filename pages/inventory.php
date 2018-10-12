@@ -67,15 +67,14 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
             <div class="container-fluid"><br>
                 <div class="col-xs-8">
-                    <input type='text' id="search_input" onkeyup="searching()" class='form-control' autocomplete='off' placeholder="Search for product or category..." >
+                    <input type='text' id="search_input" onkeyup="//searching()" class='form-control' autocomplete='off' placeholder="Search for product or category..." autofocus>
                 </div>
-				<div class="table-responsive">
+				<div class="table-responsive" id="myTable_wrapper">
 					<table class="table" id="myTable">
 						<thead>
 							<tr>
@@ -91,10 +90,17 @@
 						<tbody>
 							<?php
 							$search_query_result = mysqli_query($con,"select * from product");
-							   while ($data = mysqli_fetch_assoc($search_query_result)){
+                            echo "<script>var data = [];</script>";
+                             while ($data = mysqli_fetch_assoc($search_query_result)){
+                                $encoded_data = json_encode($data);
+                                echo "         
+                                    <script>
+                                        data.push($encoded_data);
+                                    </script>";
 									echo "
+                           
 										<!-- <form action='queries.php' method='POST'> -->
-											<tr>
+											<tr id='".$data['id']."' class='paginate'>
 												<td>
                                                     <input type='hidden' class='get-id' name='product_id' autocomplete='off' value='".$data['id']."'>
                                                     <input type='hidden' class='form-control edit-mode product_name' name='edit_name' autocomplete='off' value='".$data['name']."' id='product_name'>
@@ -131,8 +137,6 @@
                                                         Save
                                                     </button>
 												</td>
-												<td>
-												</td>
 											</tr>
 
 										<!-- </form> -->
@@ -144,13 +148,38 @@
 						</tbody>
 					</table>
 				</div>
+                
+                    <div id="page-nav-wrap">
+                        <div id="page-nav">  
+                        </div>
+                    </div>
             </div>
         <!-- </div> -->
+
         <!-- /#page-content-wrapper -->
         <footer>
             <?php
                 mr_foot();
             ?>
+            <link type="text/css" rel="stylesheet" href="../pagination/simplePagination.css"/>.
+            <script type="text/javascript" src="../pagination/jquery.simplePagination.js"></script>
+            <style>
+                #page-nav-wrap{
+                    text-align: center;
+                }
+                #page-nav{
+                    display: inline-block;
+                }
+                #page-nav ul li a, #page-nav ul li span {
+                    width: 30px;
+                }
+                #page-nav ul li a:active {
+
+                }
+            </style>
+            <script>
+                
+            </script>
         </footer>
     </div>
     <!-- /#wrapper -->

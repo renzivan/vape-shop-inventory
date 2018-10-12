@@ -20,6 +20,12 @@ include('connection.php');
 		    $log_query = "INSERT INTO log (description,product,quantity,price,date)
     					values ('Added New Product','$name',$quantity,$price,'$date')";
    			$con->query($log_query);
+
+            // $html = '<tr>';
+            // $html .= '<td>CHAR</td>';
+            // $html .= '</tr>';
+
+            // echo $html;
         } else {
             echo "<div class='alert alert-danger alert-dismissible' style='display:inline-block;'>
                         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
