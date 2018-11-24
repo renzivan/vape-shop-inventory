@@ -71,9 +71,34 @@
                 </div>
             </div>
             <div class="container-fluid"><br>
-                <div class="col-xs-8">
-                    <input type='text' id="search_input" onkeyup="//searching()" class='form-control' autocomplete='off' placeholder="Search for product or category..." autofocus>
+                <div class="col-xs-8 table-responsive">
+                    <table class="table">
+                        <tr>
+                            <td style='width:20%;'>
+                                <div>
+                                    <select name='filter_category' class='form-control' id='filter_category'>
+                                        <option value=''></option>
+                                        <option value='MOD'>MOD</option>
+                                        <option value='E Juice'>E Juice</option>
+                                        <option value='Atomizer'>Atomizer</option>
+                                        <option value='Cotton'>Cotton</option>
+                                        <option value='Wires'>Wires</option>
+                                        <option value='Battery'>Battery</option>
+                                        <option value='Accessories'>Accessories</option>
+                                        <option value='Beverages'>Beverages</option>
+                                        <option value='Services'>Services</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <input type='text' id="search_input" class='form-control' autocomplete='off' placeholder="Search for product or category..." autofocus>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
+                
 				<div class="table-responsive" id="myTable_wrapper">
 					<table class="table" id="myTable">
 						<thead>

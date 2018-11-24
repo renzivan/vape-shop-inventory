@@ -47,8 +47,33 @@ $(document).ready(function(){
     }); 
 });
 
+$('#filter_category').change(function(){
+    $('#search_input').val('');
+    var input, filter, table, tr, td, i;
+    filter_category = document.getElementById('filter_category').value.toUpperCase();
+    console.log('filter_category', filter_category)
+    table = document.getElementById('myTable');
+    tr = table.getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        td2 = tr[i].getElementsByTagName('td')[1];
+        if (td2) {
+            if (td2.innerText.toUpperCase().indexOf(filter_category) > -1){
+                tr[i].style.display = '';
+            }
+            else{
+                tr[i].style.display = 'none';
+            }
+        } 
+    }
+    // if(filter.length < 1){
+    //     $('#myTable tr').hide().slice(0,10).show();
+    //     console.log("slice");
+    // }
+});
+
 /* live search function */
 $('#search_input').keyup(function(){
+    $('#filter_category').val('');
 	var input, filter, table, tr, td, i;
 	input = document.getElementById('search_input');
 	filter = input.value.toUpperCase();
@@ -57,10 +82,14 @@ $('#search_input').keyup(function(){
 	for (i = 0; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName('td')[0];
 		td2 = tr[i].getElementsByTagName('td')[1];
-		if (td || td2) {
-			if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		if (td) {
+            if (td.innerText.toUpperCase().indexOf(filter) > -1) {
+                
 				tr[i].style.display = '';
-			}else {
+			}else if (td2.innerText.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = '';
+            }
+            else {
 				tr[i].style.display = 'none';
 			}
 		} 

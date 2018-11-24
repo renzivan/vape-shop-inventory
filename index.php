@@ -2,7 +2,7 @@
 	//header('Location: pages/inventory.php');
 		include('pages/header.php');
 		include('pages/footer.php');
-		include ('query/connection.php'); //uncomment this line if live
+		//include ('query/connection.php'); //uncomment this line if live
 ?>
 
 

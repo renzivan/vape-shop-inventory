@@ -15,7 +15,7 @@ if (mysqli_connect_errno())
   	
 	$servername = "localhost";
 	$username = "root";
-	$password = "Hello101!";
+	$password = "";
 	$dbname = "uptown";
 	$con = mysqli_connect($servername,$username,$password,$dbname);
 	//check conn
